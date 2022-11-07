@@ -34,4 +34,4 @@ jobs:
       - run: poetry install
       - name: Run Tests
         run: |
-          echo "Run tests here"
+          poetry run python tests/runtests.py
