@@ -2,6 +2,10 @@
 
 A simple Framework to create Telegram Bots
 
+[![Tests](https://github.com/ragnarok22/eliud/actions/workflows/tests.yml/badge.svg)](https://github.com/ragnarok22/eliud/actions/workflows/tests.yml)
+![GitHub](https://img.shields.io/github/license/ragnarok22/eliud)
+[![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/en/stable/)
+
 ---
 
 [//]: # (**Documentation**: https://eliud.ragnarok22.dev)
