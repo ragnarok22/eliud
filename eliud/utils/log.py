@@ -13,8 +13,7 @@ request_logger = logging.getLogger("eliud.request")
 # Default logging for Eliud. This sends an email to the site admins on every
 # HTTP 500 error. Depending on DEBUG, all other log records are either sent to
 # the console (DEBUG=True) or discarded (DEBUG=False) by means of the
-# require_debug_true filter. This configuration is quoted in
-# docs/ref/logging.txt; please amend it there if edited here.
+# require_debug_true filter.
 DEFAULT_LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,

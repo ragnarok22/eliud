@@ -20,8 +20,8 @@ class SettingsReference(str):
     the value in memory but serializes to a settings.NAME attribute reference.
     """
 
-    def __new__(self, value, setting_name):
-        return str.__new__(self, value)
+    def __new__(cls, value, setting_name):
+        return str.__new__(cls, value)
 
     def __init__(self, value, setting_name):
         self.setting_name = setting_name
@@ -40,12 +40,12 @@ class LazySettings(LazyObject):
         """
         settings_module = os.environ.get(ENVIRONMENT_VARIABLE)
         if not settings_module:
-            desc = ("Setting %s" % name) if name else "settings"
+            desc = f"Setting {name}" if name else "settings"
             raise ImproperlyConfigured(
-                "Requested %s, but settings are not configured. "
-                "You must either define the environment variable %s "
-                "or call settings.configure() before accessing settings."
-                % (desc, ENVIRONMENT_VARIABLE)
+                f"Requested {desc}, but settings are not configured. "
+                f"You must either define the environment variable "
+                f"{ENVIRONMENT_VARIABLE} or call settings.configure() "
+                f"before accessing settings."
             )
 
         self._wrapped = Settings(settings_module)
@@ -118,7 +118,12 @@ class LazySettings(LazyObject):
 
     @property
     def configured(self):
-        """Return True if the settings have already been configured."""
+        """
+        Check if the settings have already been configured.
+
+        :return: True if the settings have already been configured, otherwise return
+        False
+        """
         return self._wrapped is not empty
 
 

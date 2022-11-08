@@ -24,14 +24,8 @@ from eliud.utils.version import get_docs_version
 
 class TemplateCommand(BaseCommand):
     """
-    Copy either an Eliud application layout template or a Eliud project
+    Copy either an Eliud application layout template or an Eliud project
     layout template into the specified directory.
-
-    :param style: A color style object (see eliud.core.management.color).
-    :param app_or_project: The string 'app' or 'project'.
-    :param name: The name of the application or project.
-    :param directory: The directory to which the template should be copied.
-    :param options: The additional variables passed to project or app templates
     """
 
     requires_system_checks = []
@@ -84,6 +78,15 @@ class TemplateCommand(BaseCommand):
         )
 
     def handle(self, app_or_project, name, target=None, **options):
+        """
+        Copy either an Eliud application layout template or an Eliud project
+        layout template into the specified directory.
+
+        :param app_or_project: The string 'app' or 'project'.
+        :param name: The name of the application or project.
+        :param target: The directory to which the template should be copied.
+        :param options: The additional variables passed to project or app templates
+        """
         self.app_or_project = app_or_project
         self.a_or_an = "an" if app_or_project == "app" else "a"
         self.paths_to_remove = []
@@ -284,14 +287,9 @@ class TemplateCommand(BaseCommand):
             pass
         else:
             raise CommandError(
-                "'{name}' conflicts with the name of an existing Python "
-                "module and cannot be used as {an} {app} {type}. Please try "
-                "another {type}.".format(
-                    name=name,
-                    an=self.a_or_an,
-                    app=self.app_or_project,
-                    type=name_or_dir,
-                )
+                f"'{name}' conflicts with the name of an existing Python "
+                f"module and cannot be used as {self.a_or_an} {self.app_or_project} "
+                f"{name_or_dir}. Please try another {type}."
             )
 
     def download(self, url):

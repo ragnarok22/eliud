@@ -11,9 +11,9 @@ MODELS_MODULE_NAME = "models"
 
 
 class AppConfig:
-    """Class representing a Eliud application and its configuration."""
+    """Class representing an Eliud application and its configuration."""
 
-    def __init__(self, app_name, app_module):
+    def __init__(self, app_name: str, app_module):
         # Full Python path to the application e.g. 'eliud.contrib.admin'.
         self.name = app_name
 
@@ -29,7 +29,7 @@ class AppConfig:
         # subclass, hence the test-and-set pattern.
 
         # Last component of the Python path to the application e.g. 'admin'.
-        # This value must be unique across a Eliud project.
+        # This value must be unique across an Eliud project.
         if not hasattr(self, "label"):
             self.label = app_name.rpartition(".")[2]
         if not self.label.isidentifier():
@@ -70,8 +70,6 @@ class AppConfig:
 
     def _path_from_module(self, module):
         """Attempt to determine app's filesystem path from its module."""
-        # See #21874 for extended discussion of the behavior of this method in
-        # various cases.
         # Convert to list because __path__ may not support indexing.
         paths = list(getattr(module, "__path__", []))
         if len(paths) != 1:
@@ -80,7 +78,7 @@ class AppConfig:
                 paths = [os.path.dirname(filename)]
             else:
                 # For unknown reasons, sometimes the list returned by __path__
-                # contains duplicates that must be removed (#25246).
+                # contains duplicates that must be removed.
                 paths = list(set(paths))
         if len(paths) > 1:
             raise ImproperlyConfigured(

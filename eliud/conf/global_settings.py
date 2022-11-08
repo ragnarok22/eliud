@@ -1,4 +1,4 @@
-"""Default Eliud settings. Overrride these with settings in the module pointed to
+"""Default Eliud settings. Override these with settings in the module pointed to
 by the ELIUD_SETTINGS_MODULE environment variable.
 """
 

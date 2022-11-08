@@ -131,7 +131,7 @@ class Apps:
             # If "not ready" is due to unconfigured settings, accessing
             # INSTALLED_APPS raises a more helpful ImproperlyConfigured
             # exception.
-            settings.INSTALLED_APPS
+            settings.INSTALLED_APPS  # noqa
             raise AppRegistryNotReady("Apps aren't loaded yet.")
 
     def check_models_ready(self):

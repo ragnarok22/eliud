@@ -276,7 +276,7 @@ class LazyObject:
     instantiation. If you don't need to do that, use SimpleLazyObject.
     """
 
-    # Avoid infinite recursion when tracing __init__ (#19456).
+    # Avoid infinite recursion when tracing __init__.
     _wrapped = None
 
     def __init__(self):
@@ -338,7 +338,7 @@ class LazyObject:
     def __reduce__(self):
         if self._wrapped is empty:
             self._setup()
-        return (unpickle_lazyobject, (self._wrapped,))
+        return unpickle_lazyobject, (self._wrapped,)
 
     def __copy__(self):
         if self._wrapped is empty:

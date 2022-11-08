@@ -16,12 +16,14 @@ else:
     HAS_COLORAMA = True
 
 
-def supports_color():
+def supports_color() -> bool:
     """Return True if the running system's terminal supports color,
     and False otherwise.
+
+    :return: True if the terminal supports color, and False otherwise
     """
 
-    def vt_codes_enabled_in_windows_registry():
+    def vt_codes_enabled_in_windows_registry() -> bool:
         """Check the Windows Registry to see if VT code handling has been enabled
         by default, see https://superuser.com/a/1300251/447564.
         """
@@ -60,7 +62,7 @@ class Style:
     pass
 
 
-def make_style(config_string=""):
+def make_style(config_string: str = "") -> Style:
     """Create a Style object from the given config_string.
 
     If config_string is empty eliud.utils.termcolors.DEFAULT_PALETTE is used.
@@ -84,20 +86,16 @@ def make_style(config_string=""):
 
         setattr(style, role, style_func)
 
-    # For backwards compatibility,
-    # set style for ERROR_OUTPUT == ERROR
-    style.ERROR_OUTPUT = style.ERROR
-
     return style
 
 
 @functools.lru_cache(maxsize=None)
-def no_style():
+def no_style() -> Style:
     """Return s Style object with no color scheme."""
     return make_style("nocolor")
 
 
-def color_style(force_color=False):
+def color_style(force_color=False) -> Style:
     """Return s Style object from the Eliud color scheme."""
     if not force_color and not supports_color():
         return no_style()

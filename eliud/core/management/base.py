@@ -1,5 +1,5 @@
 """Base classes for writing management commands (named commands which can
-be executed through eliud` or `manage.py`).
+be executed through `eliud` or `manage.py`).
 """
 import argparse
 import os

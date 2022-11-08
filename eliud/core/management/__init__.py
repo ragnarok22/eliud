@@ -11,7 +11,8 @@ from argparse import (
 from collections import defaultdict
 from difflib import get_close_matches
 from importlib import import_module
-from typing import Union
+from pathlib import Path
+from typing import Dict, List, Union
 
 import eliud
 from eliud.apps import apps
@@ -27,9 +28,12 @@ from eliud.core.management.color import color_style
 from eliud.utils import autoreload
 
 
-def find_commands(management_dir):
-    """Given a path to a management directory, return a list of all the commmand
+def find_commands(management_dir: Union[Path, str]) -> List[str]:
+    """Given a path to a management directory, return a list of all the command
     names that are available.
+
+    :param management_dir: path to a management directory
+    :return: a list of all the command names that are available
     """
     command_dir = os.path.join(management_dir, "commands")
     return [
@@ -41,15 +45,20 @@ def find_commands(management_dir):
 
 def load_command_class(app_name, name):
     """Given a command name and an application name, return the Command
-    class instance. Aow all errors raised by the import process
+    class instance. Allow all errors raised by the import process
     (ImportError, AttributeError) to propagate.
+
+    :param app_name: Application name
+    :param name: Command name
+    :return: the Command class instance
+    :raise ImportError, AttributeError: couldn't import the module
     """
-    module = import_module("%s.management.commands.%s" % (app_name, name))
+    module = import_module(f"{app_name}.management.commands.{name}")
     return module.Command()
 
 
 @functools.lru_cache(maxsize=None)
-def get_commands():
+def get_commands() -> Dict[str, str]:
     """Return a dictionary mapping command names to their callback applications.
 
     Look for a management.commands package in eliud.core, and in each
@@ -65,6 +74,8 @@ def get_commands():
 
     The dictionary is cached on the first call and reused on subsequent
     calls.
+
+    :return: a dictionary in the format {command_name: app_name}
     """
     commands = {name: "eliud.core" for name in find_commands(__path__[0])}
 
@@ -87,15 +98,20 @@ def call_command(command_name: Union[str, BaseCommand], *args, **options):
     preferred unless the command object is required for further processing or
     testing.
 
-    Some examples:
-        call_command('migrate')
-        call_command('shell', plain=True)
-        call_command('sqlmigrate', 'myapp')
+    :param command_name: the command
+    :param args: the command args
+    :param options: the command options or kwargs
 
-        from django.core.management.commands import flush
-        cmd = flush.Command()
-        call_command(cmd, verbosity=0, interactive=False)
-        # Do something with cmd ..
+    :Example:
+
+    >>> call_command('migrate')
+    >>> call_command('shell', plain=True)
+    >>> call_command('sqlmigrate', 'myapp')
+
+    >>> from eliud.core.management.commands import flush
+    >>> cmd = flush.Command()
+    >>> call_command(cmd, verbosity=0, interactive=False)
+    >>> # Do something with cmd ..
     """
     if isinstance(command_name, BaseCommand):
         # Command object passed in.
@@ -208,8 +224,8 @@ class ManagementUtility:
         else:
             usage = [
                 "",
-                "Type '%s help <subcommand>' for help on a specific subcommand."
-                % self.prog_name,
+                f"Type '{self.prog_name} help <subcommand>' for help on a "
+                f"specific subcommand.",
                 "",
                 "Available subcommands:",
             ]
@@ -271,7 +287,9 @@ class ManagementUtility:
 
     def autocomplete(self):
         # TODO: Output completion suggestions for BASH
-        pass
+        # Exit code of the bash completion function is never passed back to
+        # the user, so it's safe to always exit with 0.
+        sys.exit(0)
 
     def execute(self):
         """Given the command-line arguments, figure out which subcommand is being
