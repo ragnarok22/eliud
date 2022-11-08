@@ -1,0 +1,6 @@
+from eliud.apps import AppConfig
+
+
+class {{ camel_case_app_name }}Config(AppConfig):
+    default_auto_field = 'eliud.db.models.BigAutoField'
+    name = 'apps.{{ app_name }}'
