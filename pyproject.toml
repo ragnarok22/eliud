@@ -29,6 +29,7 @@ classifiers = [
 python = "^3.8"
 pydantic = "^1.10.2"
 asgiref = "^3.5.2"
+pytz = "^2022.6"
 
 
 [tool.poetry.group.docs.dependencies]

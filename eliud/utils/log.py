@@ -44,15 +44,15 @@ DEFAULT_LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "eliud.server",
         },
-        "mail_admins": {
-            "level": "ERROR",
-            "filters": ["require_debug_false"],
-            "class": "eliud.utils.log.AdminEmailHandler",
-        },
+        # "mail_admins": {
+        #     "level": "ERROR",
+        #     "filters": ["require_debug_false"],
+        #     "class": "eliud.utils.log.AdminEmailHandler",
+        # },
     },
     "loggers": {
         "eliud": {
-            "handlers": ["console", "mail_admins"],
+            "handlers": ["console"],
             "level": "INFO",
         },
         "eliud.server": {
@@ -69,7 +69,7 @@ def configure_logging(logging_config, logging_settings):
         # First find the logging configuration function ...
         logging_config_func = import_string(logging_config)
 
-        logging.config.dictConfig(DEFAULT_LOGGING)
+        logging_config_func(DEFAULT_LOGGING)
 
         # ... then invoke it with the logging settings
         if logging_settings:
