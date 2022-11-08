@@ -1,4 +1,4 @@
-"""Sets up the terminal color shceme."""
+"""Sets up the terminal color scheme."""
 
 import functools
 import os
