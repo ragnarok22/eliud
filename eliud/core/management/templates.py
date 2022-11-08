@@ -96,7 +96,11 @@ class TemplateCommand(BaseCommand):
 
         # if some directory is given, make sure it's nicely expanded
         if target is None:
-            top_dir = os.path.join(os.getcwd(), name)
+            # Apps are created in apps module
+            if app_or_project == "app":
+                top_dir = os.path.join(os.getcwd(), "apps", name)
+            else:
+                top_dir = os.path.join(os.getcwd(), name)
             try:
                 os.makedirs(top_dir)
             except FileExistsError:
