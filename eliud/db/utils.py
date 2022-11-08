@@ -3,8 +3,7 @@ from importlib import import_module
 
 from eliud.conf import settings
 from eliud.core.exceptions import ImproperlyConfigured
-from eliud.utils.connection import ConnectionDoesNotExist  # NOQA: F401
-from eliud.utils.connection import BaseConnectionHandler
+from eliud.utils.connection import BaseConnectionHandler, ConnectionDoesNotExist
 from eliud.utils.functional import cached_property
 from eliud.utils.module_loading import import_string
 

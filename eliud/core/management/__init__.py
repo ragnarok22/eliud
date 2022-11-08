@@ -146,7 +146,7 @@ def call_command(command_name: Union[str, BaseCommand], *args, **options):
         for opt in group._group_actions
         if group.required
     }
-    # Any required arguments which are apssed in via **options must be passed
+    # Any required arguments which are passed in via **options must be passed
     # to parse_args().
     for opt in parser_actions:
         if opt.dest in options and (
@@ -253,7 +253,7 @@ class ManagementUtility:
                 # following line will retrigger an ImproperlyConfigured exception
                 # (get_commands() swallows the original one) so the user is
                 # informed about it.
-                settings.INSTALLED_APPS
+                settings.INSTALLED_APPS  # noqa
             elif not settings.configured:
                 sys.stderr.write("No Eliud settings specified.\n")
             possible_matches = get_close_matches(subcommand, commands)
