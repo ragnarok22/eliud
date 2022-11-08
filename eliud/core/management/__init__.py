@@ -289,7 +289,8 @@ class ManagementUtility:
         # TODO: Output completion suggestions for BASH
         # Exit code of the bash completion function is never passed back to
         # the user, so it's safe to always exit with 0.
-        sys.exit(0)
+        # sys.exit(0)
+        pass
 
     def execute(self):
         """Given the command-line arguments, figure out which subcommand is being
