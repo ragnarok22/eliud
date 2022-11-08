@@ -1,6 +1,6 @@
 # Eliud
 
-A simple Framework to create Telegram Bots
+A simple Framework to create Telegram Bots (WIP)
 
 [![Tests](https://github.com/ragnarok22/eliud/actions/workflows/tests.yml/badge.svg)](https://github.com/ragnarok22/eliud/actions/workflows/tests.yml)
 ![GitHub](https://img.shields.io/github/license/ragnarok22/eliud)
