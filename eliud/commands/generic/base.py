@@ -8,7 +8,7 @@ logger = logging.getLogger("eliud.command")
 
 def _validate_command(command: str):
     command = command.split("?")[0]
-    match = re.fullmatch("[a-zA-Z]+[a-zA-Z0-9-_]", command)
+    match = re.fullmatch("[a-zA-Z]+[a-zA-Z0-9-_]*", command)
     if not match:
         raise CommandException(f"Command {command} is not a valid command")
 
