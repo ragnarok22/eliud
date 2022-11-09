@@ -12,3 +12,25 @@ A simple Framework to create Telegram Bots as fast you can.
 * `eliud startapp [app-name]` - Create a new app inside a project.
 * `eliud runbot` - Start the live-reloading development server.
 * `eliud help` - Print help message and exit.
+
+
+## Requirements
+
+Python 3.8+
+
+## Example
+Create a project
+
+    eliud startproject myproject
+
+Enter the project
+
+    cd myproject
+
+set your Bot token in settings.py
+
+    echo "TELEGRAM_TOKEN=wers***" >> myproject/settings.py
+
+Run your bot
+
+    python manage.py runbot
