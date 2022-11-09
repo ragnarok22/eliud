@@ -19,18 +19,18 @@ A simple Framework to create Telegram Bots as fast you can.
 Python 3.8+
 
 ## Example
-Create a project
+Create a project named `myproject`:
 
     eliud startproject myproject
 
-Enter the project
+Enter the project:
 
     cd myproject
 
-set your Bot token in settings.py
+set your Bot token (created in [@BotFather](https://t.me/BotFather)) in settings.py:
 
     echo "TELEGRAM_TOKEN=wers***" >> myproject/settings.py
 
-Run your bot
+Run your bot:
 
     python manage.py runbot
