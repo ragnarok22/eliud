@@ -8,7 +8,7 @@ A simple Framework to create Telegram Bots (WIP)
 
 ---
 
-[//]: # (**Documentation**: https://eliud.ragnarok22.dev)
+**Documentation**: https://ragnarok22.github.io/eliud
 
 **Source Code**: https://github.com/ragnarok22/eliud
 
