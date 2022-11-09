@@ -1,7 +1,9 @@
 import logging
 import re
+from typing import Type
 
-from ..exceptions import CommandException
+from eliud.commands.exceptions import CommandException
+from eliud.markups.base import Markup
 
 logger = logging.getLogger("eliud.command")
 
@@ -29,8 +31,22 @@ class BaseCommand:
 
 class Command(BaseCommand):
     command: str = None
-    markup = None
+    markup: Type[Markup] = None
     markup_kwargs: dict = None
+
+    def __init__(self, **kwargs):
+        super(Command, self).__init__(**kwargs)
+        if not self.command:
+            try:
+                self.command = kwargs.pop("command")
+            except KeyError:
+                raise AttributeError("You must provide a 'command' string")
+
+        if not self.markup:
+            try:
+                self.markup = kwargs.pop("markup")
+            except KeyError:
+                raise AttributeError("You must provide a markup")
 
     def render_markup(self, **kwargs):
         return self.markup(**kwargs)
