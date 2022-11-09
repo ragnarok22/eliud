@@ -48,31 +48,26 @@ class Signal:
         """
         Connect receiver to sender for signal.
 
-        Arguments:
-
-            receiver
+        :param receiver:
                 A function or an instance method which is to receive signals.
                 Receivers must be hashable objects.
-
-                If weak is True, then receiver must be weak referenceable.
-
-                Receivers must be able to accept keyword arguments.
-
-                If a receiver is connected with a dispatch_uid argument, it
+                - If weak is True, then receiver must be weak referenceable.
+                - Receivers must be able to accept keyword arguments.
+                - If a receiver is connected with a dispatch_uid argument, it
                 will not be added if another receiver was already connected
                 with that dispatch_uid.
 
-            sender
+        :param sender:
                 The sender to which the receiver should respond. Must either be
                 a Python object, or None to receive events from any sender.
 
-            weak
+        :param weak:
                 Whether to use weak references to the receiver. By default, the
                 module will attempt to use weak references to the receiver
                 objects. If this parameter is false, then strong references will
                 be used.
 
-            dispatch_uid
+        :param dispatch_uid:
                 An identifier used to uniquely identify a particular instance of
                 a receiver. This will usually be a string, though it may be
                 anything hashable.
@@ -117,16 +112,14 @@ class Signal:
         If weak references are used, disconnect need not be called. The receiver
         will be removed from dispatch automatically.
 
-        Arguments:
-
-            receiver
+        :param receiver:
                 The registered receiver to disconnect. May be none if
                 dispatch_uid is specified.
 
-            sender
+        :param sender:
                 The registered sender to disconnect
 
-            dispatch_uid
+        :param dispatch_uid:
                 the unique identifier of the receiver to disconnect
         """
         if dispatch_uid:
@@ -149,7 +142,7 @@ class Signal:
     def has_listeners(self, sender=None):
         return bool(self._live_receivers(sender))
 
-    def send(self, sender, **named):
+    def send(self, sender, **named) -> list:
         """
         Send signal from sender to all connected receivers.
 
@@ -157,15 +150,13 @@ class Signal:
         terminating the dispatch loop. So it's possible that all receivers
         won't be called if an error is raised.
 
-        Arguments:
-
-            sender
+        :param sender:
                 The sender of the signal. Either a specific object or None.
 
-            named
+        :param named:
                 Named arguments which will be passed to receivers.
 
-        Return a list of tuple pairs [(receiver, response), ... ].
+        :return: a list of tuple pairs [(receiver, response), ... ].
         """
         if (
             not self.receivers
@@ -178,21 +169,19 @@ class Signal:
             for receiver in self._live_receivers(sender)
         ]
 
-    def send_robust(self, sender, **named):
+    def send_robust(self, sender, **named) -> list:
         """
         Send signal from sender to all connected receivers catching errors.
 
-        Arguments:
-
-            sender
+        :param sender:
                 The sender of the signal. Can be any Python object (normally one
                 registered with a connect if you actually want something to
                 occur).
 
-            named
+        :param named:
                 Named arguments which will be passed to receivers.
 
-        Return a list of tuple pairs [(receiver, response), ... ].
+        :return: a list of tuple pairs [(receiver, response), ... ].
 
         If any receiver raises an error (specifically any subclass of
         Exception), return the error instance as the result for that receiver.
@@ -231,7 +220,7 @@ class Signal:
                 if not (isinstance(r[1], weakref.ReferenceType) and r[1]() is None)
             ]
 
-    def _live_receivers(self, sender):
+    def _live_receivers(self, sender) -> list:
         """
         Filter sequence of receivers to get resolved, live receivers.
 
