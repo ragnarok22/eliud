@@ -1,1 +1,6 @@
-site_name: My Docs
+site_name: Eliud
+site_url: https://ragnarok22.github.io/eliud/
+
+nav:
+  - Home: index.md
+theme: readthedocs
