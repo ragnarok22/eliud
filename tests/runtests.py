@@ -20,7 +20,6 @@ if __name__ == "__main__":
         return path.replace(os.path.sep, ".").removesuffix(".py")
 
     tests_list = glob.glob("test_*")
-    print(tests_list)
     suite = []
     for test_target in tests_list:
         if os.path.isdir(test_target):
