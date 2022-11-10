@@ -34,4 +34,9 @@ jobs:
       - run: poetry install
       - name: Run Tests
         run: |
-          poetry run python tests/runtests.py
+          cd tests
+          poetry run python runtests.py
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./tests/coverage.xml

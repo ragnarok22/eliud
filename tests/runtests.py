@@ -1,8 +1,10 @@
 import glob
-import inspect
 import os
 import sys
 import unittest
+from pathlib import Path
+
+import coverage
 
 try:
     import eliud  # noqa: F401
@@ -15,6 +17,8 @@ RUNTESTS_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 if __name__ == "__main__":
+    cov = coverage.Coverage()
+    cov.start()
 
     def get_name_from_path(path: str) -> str:
         return path.replace(os.path.sep, ".").removesuffix(".py")
@@ -38,3 +42,6 @@ if __name__ == "__main__":
 
     main_suite = unittest.TestSuite(suite)
     unittest.TextTestRunner(verbosity=1).run(main_suite)
+    cov.stop()
+    cov.save()
+    cov.xml_report()
