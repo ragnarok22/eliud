@@ -4,6 +4,7 @@ A simple Framework to create Telegram Bots (WIP)
 
 [![Tests](https://github.com/ragnarok22/eliud/actions/workflows/tests.yml/badge.svg)](https://github.com/ragnarok22/eliud/actions/workflows/tests.yml)
 [![Docs](https://github.com/ragnarok22/eliud/actions/workflows/publish-docs.yml/badge.svg)](https://github.com/ragnarok22/eliud/actions/workflows/publish-docs.yml)
+[![CodeQL](https://github.com/ragnarok22/eliud/actions/workflows/codeql.yml/badge.svg)](https://github.com/ragnarok22/eliud/actions/workflows/codeql.yml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ragnarok22/eliud/main.svg)](https://results.pre-commit.ci/latest/github/ragnarok22/eliud/main)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eliud)
 ![PyPI - Implementation](https://img.shields.io/pypi/implementation/eliud)
