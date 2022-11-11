@@ -21,7 +21,7 @@ if __name__ == "__main__":
     cov.start()
 
     def get_name_from_path(path: str) -> str:
-        return path.replace(os.path.sep, ".").removesuffix(".py")
+        return path.replace(os.path.sep, ".").replace(".py", "")
 
     tests_list = glob.glob("test_*")
     suite = []
