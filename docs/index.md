@@ -3,8 +3,12 @@
 A simple Framework to create Telegram Bots as fast you can.
 
 [![Tests](https://github.com/ragnarok22/eliud/actions/workflows/tests.yml/badge.svg)](https://github.com/ragnarok22/eliud/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/ragnarok22/eliud/branch/main/graph/badge.svg?token=TslpCxsPRQ)](https://codecov.io/gh/ragnarok22/eliud)
 ![GitHub](https://img.shields.io/github/license/ragnarok22/eliud)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/en/stable/)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eliud)
+![PyPI](https://img.shields.io/pypi/v/eliud)
+g
 
 Eliud Framework is a modern, easy and fast Framework. It enables you to easily interact with the main Telegram API
 a bot identity using Python.
