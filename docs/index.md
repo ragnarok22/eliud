@@ -6,31 +6,33 @@ A simple Framework to create Telegram Bots as fast you can.
 ![GitHub](https://img.shields.io/github/license/ragnarok22/eliud)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/en/stable/)
 
-## Commands
+Eliud Framework is a modern, easy and fast Framework. It enables you to easily interact with the main Telegram API
+a bot identity using Python.
 
-* `eliud startproject [dir-name]` - Create a new project.
-* `eliud startapp [app-name]` - Create a new app inside a project.
-* `eliud runbot` - Start the live-reloading development server.
-* `eliud help` - Print help message and exit.
+## Support
+If you'd like to support us, you can consider:
+
+* Become a sponsor.
+* Create tutorials.
+* Fix bugs and add functionalities.
 
 
-## Requirements
+## How the Documentation is organize
 
-Python 3.8+
+TODO
 
-## Example
-Create a project named `myproject`:
 
-    eliud startproject myproject
+### First steps
 
-Enter the project:
+* [Quick Start](): Overview to get you stared quickly.
+* Invoking Methods: How to call Eliud's methods.
+* Error Handling: How to handle API errors correctly.
 
-    cd myproject
+### API Reference
 
-set your Bot token (created in [@BotFather](https://t.me/BotFather)) in settings.py:
+TODO
 
-    echo "TELEGRAM_TOKEN=wers***" >> myproject/settings.py
+### META
 
-Run your bot:
-
-    python manage.py runbot
+* [FAQ](): Answers to common questions.
+* Release Notes: Release notes for releases.
