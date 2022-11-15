@@ -9,29 +9,33 @@ class BaseMarkup:
         :keyword kwargs: Optional. kwargs to format the text
         """
         try:
-            self._text = kwargs.pop("text")
+            if not self.text:
+                self.text = kwargs.pop("text")
         except KeyError:
-            raise AttributeError("You must to provide a 'text'")
+            pass
 
-        self.__check_kwargs(kwargs)
-        self._kwargs = kwargs
+        if not self.kwargs:
+            self.kwargs = kwargs
 
-    @property
-    def text(self) -> str:
-        if self._kwargs:
-            return self._text.format(**self._kwargs)
+
+class MarkupMixin:
+    """A mixin that can be used to render a Markup"""
+
+    text = None
+    kwargs = None
+
+    def get_text(self):
+        if self.kwargs:
+            self.__check_kwargs(self.kwargs)
+            return self.text.format(**self.kwargs)
         else:
-            return self._text
-
-    @text.setter
-    def text(self, value):
-        self._text = value
+            return self.text
 
     def __check_kwargs(self, kwargs):
         if not kwargs:
             return
         try:
-            self._text.format(**kwargs)
+            self.text.format(**kwargs)
         except KeyError:
             raise KeyError("Wrong attributes for the given text")
 
@@ -42,13 +46,12 @@ class BaseMarkup:
         return f"Markup(text={self.text})"
 
 
-class TextMarkup(BaseMarkup):
+class TextMarkup(MarkupMixin, BaseMarkup):
     """
     Class only for text markup
     """
 
-    def __init__(self, text, **kwargs):
-        kwargs["text"] = text
+    def __init__(self, **kwargs):
         super(TextMarkup, self).__init__(**kwargs)
 
 
