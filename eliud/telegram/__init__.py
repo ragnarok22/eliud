@@ -1,8 +1,9 @@
 import logging
 
 import telegram
+from telegram import Update
 from telegram.error import TelegramError
-from telegram.ext import CommandHandler, Updater
+from telegram.ext import CallbackContext, CommandHandler, Updater
 
 from eliud.commands import Command
 from eliud.conf import settings
@@ -78,4 +79,4 @@ class Bot:
 
 bot = Bot()
 
-__all__ = ["bot"]
+__all__ = ["bot", "Update", "CallbackContext"]

@@ -27,6 +27,9 @@ class BaseMarkup:
         except KeyError:
             raise KeyError(f"Wrong attributes for the given text. Attributes: {kwargs}")
 
+    def get_text(self):
+        raise NotImplementedError
+
 
 class MarkupMixin(BaseMarkup):
     """A mixin that can be used to render a Markup"""

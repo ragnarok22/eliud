@@ -3,7 +3,8 @@ import re
 from typing import Type
 
 from eliud.commands.exceptions import CommandException
-from eliud.markups.base import Markup
+from eliud.markups.base import BaseMarkup
+from eliud.telegram import CallbackContext, Update, bot
 
 logger = logging.getLogger("eliud.command")
 
@@ -31,8 +32,10 @@ class BaseCommand:
 
 class Command(BaseCommand):
     command: str = None
-    markup: Type[Markup] = None
+    description: str = None
+    markup: Type[BaseMarkup] = None
     markup_kwargs: dict = None
+    is_async = False
 
     def __init__(self, **kwargs):
         super(Command, self).__init__(**kwargs)
@@ -48,5 +51,19 @@ class Command(BaseCommand):
             except KeyError:
                 raise AttributeError("You must provide a markup")
 
+    def __str__(self):
+        return self.__repr__()
+
+    def __repr__(self):
+        return f"Command(text='{self.command}', description='{self.description}')"
+
     def render_markup(self, **kwargs):
-        return self.markup(**kwargs)
+        self.markup_kwargs.update(kwargs)
+        return self.markup(**self.markup_kwargs)
+
+    def get_handle(self):
+        def handler(update: Update, context: CallbackContext):
+
+            bot.send_message(update.effective_chat.id, self.render_markup().get_text())
+
+        return handler

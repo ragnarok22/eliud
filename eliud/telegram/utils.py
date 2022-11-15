@@ -2,7 +2,8 @@ import logging
 
 from telegram.error import TelegramError
 
-from ..markups.base import BaseMarkup
+from eliud.markups.base import BaseMarkup
+
 from . import bot
 
 logger = logging.getLogger("eliud.telegram")
