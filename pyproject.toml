@@ -34,6 +34,7 @@ classifiers = [
 python = "^3.8"
 asgiref = "^3.5.2"
 pytz = "^2022.6"
+python-telegram-bot = "^13.14"
 
 
 [tool.poetry.group.docs.dependencies]

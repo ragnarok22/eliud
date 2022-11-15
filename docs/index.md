@@ -20,7 +20,7 @@ If you'd like to support us, you can consider:
 * Fix bugs and add functionalities.
 
 
-## How the Documentation is organize
+## How the Documentation is organized
 
 TODO
 
