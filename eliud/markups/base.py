@@ -15,10 +15,20 @@ class BaseMarkup:
             pass
 
         if not self.kwargs:
+            if self.text:
+                self._check_kwargs(kwargs)
             self.kwargs = kwargs
 
+    def _check_kwargs(self, kwargs):
+        if not kwargs:
+            return
+        try:
+            self.text.format(**kwargs)
+        except KeyError:
+            raise KeyError(f"Wrong attributes for the given text. Attributes: {kwargs}")
 
-class MarkupMixin:
+
+class MarkupMixin(BaseMarkup):
     """A mixin that can be used to render a Markup"""
 
     text = None
@@ -26,18 +36,10 @@ class MarkupMixin:
 
     def get_text(self):
         if self.kwargs:
-            self.__check_kwargs(self.kwargs)
+            self._check_kwargs(self.kwargs)
             return self.text.format(**self.kwargs)
         else:
             return self.text
-
-    def __check_kwargs(self, kwargs):
-        if not kwargs:
-            return
-        try:
-            self.text.format(**kwargs)
-        except KeyError:
-            raise KeyError("Wrong attributes for the given text")
 
     def __str__(self):
         return self.text
@@ -46,7 +48,7 @@ class MarkupMixin:
         return f"Markup(text={self.text})"
 
 
-class TextMarkup(MarkupMixin, BaseMarkup):
+class TextMarkup(MarkupMixin):
     """
     Class only for text markup
     """
