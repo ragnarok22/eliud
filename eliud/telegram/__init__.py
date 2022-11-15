@@ -5,10 +5,8 @@ from telegram import Update
 from telegram.error import TelegramError
 from telegram.ext import CallbackContext, CommandHandler, Updater
 
-from eliud.commands import Command
 from eliud.conf import settings
 from eliud.markups.base import BaseMarkup
-from eliud.telegram import utils
 
 logger = logging.getLogger("eliud.telegram")
 
@@ -37,7 +35,7 @@ class Bot:
         """
         self.dispatcher.add_handler(handler, pattern=pattern, run_async=run_async)
 
-    def add_command(self, command: Command):
+    def add_command(self, command):
         """
         Add command action
         :param command:
@@ -77,6 +75,15 @@ class Bot:
         logger.info(f"Running at https://t.me/{self.bot.username}")
 
 
+def send_message(chat_id: str, markup: BaseMarkup):
+    try:
+        bot.send_message(chat_id=chat_id, markup=markup)
+        return True
+    except TelegramError as e:
+        logger.error(e)
+        return False
+
+
 bot = Bot()
 
-__all__ = ["bot", "Update", "CallbackContext"]
+__all__ = ["bot", "Update", "CallbackContext", "send_message"]
