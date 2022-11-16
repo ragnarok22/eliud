@@ -1,3 +1,6 @@
-from eliud.markups import Command
+from eliud.markups import TextMarkup
+
 
 # Create your commands here.
+class StartMarkup(TextMarkup):
+    text = "Hello from Eliud Framework"

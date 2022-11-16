@@ -1,3 +1,8 @@
 from eliud.commands import Command
+from . import markups
+
 
 # Create your commands here.
+class StartCommand(Command):
+    command = "start"
+    markup = markups.StartMarkup
