@@ -17,3 +17,13 @@ class SuspiciousOperation(Exception):
 
 class SuspiciousFileOperation(SuspiciousOperation):
     """A Suspicious filesystem operation was attempted"""
+
+
+class ObjectDoesNotExist(Exception):
+    """The requested object does not exist"""
+
+    silent_variable_failure = True
+
+
+class FieldDoesNotExist(Exception):
+    """The requested model field does not exist"""
