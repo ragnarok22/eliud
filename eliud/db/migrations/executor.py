@@ -77,7 +77,7 @@ class MigrationExecutor:
         """
         state = ProjectState(real_apps=self.loader.unmigrated_apps)
         if with_applied_migrations:
-            # Create the forwards plan Eliud would follow on an empty database
+            # Create the forwards plan Django would follow on an empty database
             full_plan = self.migration_plan(
                 self.loader.graph.leaf_nodes(), clean_start=True
             )
@@ -94,10 +94,11 @@ class MigrationExecutor:
     def migrate(self, targets, plan=None, state=None, fake=False, fake_initial=False):
         """
         Migrate the database up to the given targets.
-        Eliud first needs to create all project states before a migration is
+
+        Django first needs to create all project states before a migration is
         (un)applied and in a second step run all the database operations.
         """
-        # The eliud_migrations table must be present to record applied
+        # The django_migrations table must be present to record applied
         # migrations, but don't create it if there are no migrations to apply.
         if plan == []:
             if not self.recorder.has_table():
@@ -107,7 +108,7 @@ class MigrationExecutor:
 
         if plan is None:
             plan = self.migration_plan(targets)
-        # Create the forwards plan Eliud would follow on an empty database
+        # Create the forwards plan Django would follow on an empty database
         full_plan = self.migration_plan(
             self.loader.graph.leaf_nodes(), clean_start=True
         )
@@ -174,8 +175,9 @@ class MigrationExecutor:
         """
         Take a list of 2-tuples of the form (migration instance, True) and
         unapply them in reverse order they occur in the full_plan.
+
         Since unapplying a migration requires the project state prior to that
-        migration, Eliud will compute the migration states before each of them
+        migration, Django will compute the migration states before each of them
         in a first run over the plan and then unapply them in a second run over
         the plan.
         """
@@ -288,6 +290,7 @@ class MigrationExecutor:
     def check_replacements(self):
         """
         Mark replacement migrations applied if their replaced set all are.
+
         Do this unconditionally on every migrate, rather than just when
         migrations are applied or unapplied, to correctly handle the case
         when a new squash migration is pushed to a deployment that already had
