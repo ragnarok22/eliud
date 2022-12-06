@@ -38,6 +38,6 @@ repos:
           - "--ignore=E203,E266,E501,W503,F403,F401,E402"
 
 -   repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.28.0
+    rev: v8.29.0
     hooks:
     -   id: eslint
