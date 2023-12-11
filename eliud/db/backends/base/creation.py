@@ -116,6 +116,7 @@ class BaseDatabaseCreation:
         Designed only for test runner usage; will not handle large
         amounts of data.
         """
+
         # Iteratively return every object for all models to serialize.
         def get_objects():
             from eliud.db.migrations.loader import MigrationLoader
