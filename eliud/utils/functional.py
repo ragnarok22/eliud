@@ -23,7 +23,6 @@ class cached_property:
         )
 
     def __init__(self, func, name=None):
-
         if name is not None:
             warnings.warn(
                 "The name argument is deprecated as it's unnecessary as of "

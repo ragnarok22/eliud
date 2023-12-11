@@ -63,7 +63,6 @@ class Command(BaseCommand):
 
     def get_handle(self):
         def handler(update: Update, context: CallbackContext):
-
             bot.send_message(update.effective_chat.id, self.render_markup().get_text())
 
         return handler
